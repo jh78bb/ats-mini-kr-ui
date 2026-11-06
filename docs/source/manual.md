@@ -75,6 +75,8 @@ The menu can be invoked by clicking the encoder button and is closed automatical
 
 ## Settings menu
 
+* **Language** - Menus default to Korean (KR). Select EN to switch to English. The choice is saved across power cycles; existing settings and station lists are preserved. Korean station names are displayed in either language; KR also translates receiving area names. Long Korean names are fitted to the available width. FM, AM, USB, LSB, RDS and other radio abbreviations stay unchanged.
+
 * **Brightness** - Display brightness level (10...255). The minimal one draws about 80mA of the battery power, the default one about 100mA, the max level about 120mA.
 * **Calibration** - SSB calibration offset (-2000...2000, per mode/band).
 * **RDS** - Radio Data System options: PS - radio station name, CT - date and time, RT - text, PTY - genre, ALL (EU/US) - everything. RDS CT should contain UTC date and time, but some stations incorrectly transmit local or completely bogus values. The clock is synchronized from RDS only once. To synchronize it again, disable and re-enable RDS CT or switch the receiver off and on.

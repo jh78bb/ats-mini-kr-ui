@@ -54,6 +54,7 @@
 #define CMD_UPDATEFW   0x3200 // |
 #define CMD_FM_STEREO  0x3300 // |
 #define CMD_KR_AREA    0x3400 // |
+#define CMD_LANGUAGE   0x3480 // | UI language
 #define CMD_ABOUT      0x3500 //-+
 
 // UI Layouts

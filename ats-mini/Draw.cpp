@@ -6,6 +6,7 @@
 #include "BleMode.h"
 #include "Stations.h"
 #include "Draw.h"
+#include "UiText.h"
 
 //
 // Draw preferences write indicator
@@ -79,8 +80,8 @@ bool drawStatus(int x, int y)
     // Draw two lines of operation status
     spr.setTextDatum(TC_DATUM);
     spr.setTextColor(TH.rds_text);
-    spr.drawString(statusLines[0], x, y, FONT_SMALL);
-    spr.drawString(statusLines[1], x, y+17, FONT_SMALL);
+    drawUiString(statusLines[0], x, y, FONT_SMALL);
+    drawUiString(statusLines[1], x, y+17, FONT_SMALL);
     return(true);
   }
 
@@ -97,7 +98,7 @@ void drawZoomedMenu(const char *text, bool force)
   spr.fillSmoothRoundRect(RDS_OFFSET_X - 72 + 1, RDS_OFFSET_Y - 3 + 1, 152, 26, 4, TH.menu_bg);
   spr.setTextDatum(TC_DATUM);
   spr.setTextColor(TH.menu_item);
-  spr.drawString(text, RDS_OFFSET_X + 5, RDS_OFFSET_Y, FONT_LARGE);
+  drawUiString(text, RDS_OFFSET_X + 5, RDS_OFFSET_Y, FONT_LARGE, 148);
   spr.drawRoundRect(RDS_OFFSET_X - 72, RDS_OFFSET_Y - 3, 154, 28, 4, TH.menu_border);
 }
 
@@ -374,7 +375,7 @@ void drawStationName(const char *name, int x, int y)
 {
   spr.setTextDatum(TC_DATUM);
   spr.setTextColor(TH.rds_text);
-  spr.drawString(name, x, y, FONT_LARGE);
+  spr.drawString(name, x, y, uiFont(name, FONT_LARGE));
 }
 
 //
@@ -390,7 +391,7 @@ void drawLongStationName(const char *name, int x, int y)
   if((x + width) >= 320)
   {
     spr.setTextDatum(TL_DATUM);
-    spr.drawString(name, x, y, font);
+    drawUiString(name, x, y, font, DISPLAY_WIDTH - x);
   }
   else if(width <= 60)
   {

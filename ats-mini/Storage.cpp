@@ -3,6 +3,7 @@
 #include "Themes.h"
 #include "Menu.h"
 #include "KrFm.h"
+#include "UiText.h"
 #include <LittleFS.h>
 #include "nvs_flash.h"
 
@@ -202,6 +203,7 @@ void prefsSave(uint32_t items)
     prefs.putUChar("UILayout",    uiLayoutIdx);    // UI Layout
     prefs.putUChar("BLEMode",     bleModeIdx);     // Bluetooth mode
     prefs.putUChar("USBMode",     usbModeIdx);     // USB mode
+    prefs.putUChar("Language",    uiLanguage);     // UI language
     prefs.putUChar("TCPMode",     tcpModeIdx);     // TCP mode
 
     // Done with global settings
@@ -289,6 +291,8 @@ bool prefsLoad(uint32_t items)
     uiLayoutIdx    = prefs.getUChar("UILayout", uiLayoutIdx);   // UI Layout
     bleModeIdx     = prefs.getUChar("BLEMode", bleModeIdx);     // Bluetooth mode
     usbModeIdx     = prefs.getUChar("USBMode", usbModeIdx);     // USB mode
+    uiLanguage     = prefs.getUChar("Language", DEFAULT_UI_LANGUAGE);
+    if(uiLanguage > UI_KOREAN) uiLanguage = DEFAULT_UI_LANGUAGE;
     tcpModeIdx     = prefs.getUChar("TCPMode", TCP_OFF);        // TCP mode
 
     // Done with global settings

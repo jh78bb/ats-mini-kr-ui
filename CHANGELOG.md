@@ -4,6 +4,40 @@ The user manual is available at <https://esp32-si4732.github.io/ats-mini/manual.
 
 <!-- towncrier release notes start -->
 
+## 2.41 (2026-11-06)
+
+
+### Added
+
+- An FM Stereo setting to force mono audio instead of letting the receiver blend down to mono by itself, which trades the stereo image for less hiss on weak stations. [#371](https://github.com/esp32-si4732/ats-mini/issues/371)
+- Binary screenshot command `c` sends a BMP file directly using half as much data. [#373](https://github.com/esp32-si4732/ats-mini/issues/373)
+- Add an NTP Now main menu action that briefly connects using saved Wi-Fi networks while keeping the Wi-Fi mode Off.
+- Added DAY (9–26 MHz) and NIGHT (3–13 MHz) shortwave bands for different times of day.
+- Added a TECSUN-style ETM mode. ETM Scan finds stations across the current AM/FM band, saves a separate sorted list of up to 256 frequencies per band across power cycles, and selects ETM in TuneMode. TuneMode values follow their displayed Step, Memory, and ETM order without migrating older saved values. Cancelling a scan preserves the previous ETM list.
+- Added a full band AM/FM station scan with saved, sorted Memory lists shared by all FM, MW, or SW bands and live scan results in the left panel. Each list holds up to 256 stations, while browsing, clearing, and ATS operate only within the current band; ATS preserves frequencies saved for other bands in the same list. A separate red M above the frequency unit indicates that the current frequency is saved in Memory, while a green F indicates Favorite; these appear before the Mem or ETM TuneMode label. The Memory menu has Add Current, ATS, and Clear entries; opening it on a saved frequency selects that entry automatically. Use Add Current to save the tuned frequency and see a persistent result message, or hold ATS twice to confirm replacing the current band's frequencies with scan results. Cancelling a scan restores the previous Memory list, while a successful add or scan closes the menu. Memory result and error messages remain visible long enough to read. Hold a saved frequency or Clear twice to confirm deletion. Previously saved per-band lists need to be rescanned. Regular encoder tuning now defaults to Memory; choose Memory or Step in the main menu's TuneMode submenu. The original 99-slot Memory menu is now named Favorite. The Web UI also uses the Favorite name, shows the shared Memory lists separately, and can download or restore both sets together as a YAML backup.
+- Show Korean FM station names from the Korean radio frequency list when FM Region is KR. Use saved Memory scan results to identify the receiving area, show names from that area and adjacent areas, and suppress distant or ambiguous matches. KR Area in Settings also allows manual area selection; ATS or Clear resets it to Auto. When KR is not selected, the reminder shown when opening KR Area remains visible long enough to read.
+- 한국어 메뉴를 기본으로 표시하고 설정 → 언어에서 EN/KR을 선택할 수 있습니다. 선택은 재부팅 후에도 유지됩니다. 수신 지역 목록과 메뉴 확대 화면에 한글을 표시하고, 긴 한국 FM 방송국명을 화면 폭에 맞춥니다.
+
+
+### Changed
+
+- FM Region and FM Stereo can be changed in any mode and take effect when using FM. [#371](https://github.com/esp32-si4732/ats-mini/issues/371)
+- Faster screenshot capture with more reliable USB transfers. [#373](https://github.com/esp32-si4732/ats-mini/issues/373)
+- Scan for Bluetooth HID remotes with a 25% duty cycle instead of 100%, so the Bluetooth radio is busy for a quarter of each scan. [#374](https://github.com/esp32-si4732/ats-mini/issues/374)
+- Changed the default FM Region to KR and the default UI Layout to S-Meter. Existing saved settings are preserved.
+- Connect to Wi-Fi and synchronize time in the background so startup, tuning, and menus remain responsive.
+- Do not reconnect or synchronize time in Sync Only mode after waking from CPU Sleep.
+- Holding the encoder button for 0.5-2 seconds closes menus that do not use that gesture for an action. Presses longer than 2 seconds still control sleep.
+- Moved Squelch, Bandwidth, AGC/ATTN, AVC, SoftMute, Mode, Step, and NTP Now from the main menu into the ---More--- submenu, placed below Settings. The main menu now always opens on Volume. TuneMode now defaults to Step and controls whether Seek and Scan appear in the main menu. Mem and ETM are right-aligned with a small screen-edge margin above the frequency unit when active, while Step is not shown, and changing TuneMode no longer shows a status notification.
+- Show MW1, MW2, and MW3 immediately after VHF in the Band menu while preserving saved band, memory, and station data.
+- The Update FW item is hidden from Settings, and the web interface no longer shows Check for updates. Manual firmware upload remains visible without an expandable section on the web Update page.
+
+
+### Fixed
+
+- Keep controls responsive while showing Bluetooth, Wi-Fi, and firmware update status messages. [#374](https://github.com/esp32-si4732/ats-mini/issues/374)
+- Continue scanning the full band after a weak seek result, seek timeout, or a full station list.
+
 ## 2.40 (2026-09-19)
 
 
